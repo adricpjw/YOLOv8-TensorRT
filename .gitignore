@@ -1,12 +1,12 @@
 # Personal
-.idea
-*.engine
-*.pt
-*.pth
-*.onnx
-*.jpg
-*.png
-*.bmp
+# .idea
+# *.engine
+# *.pt
+# *.pth
+# *.onnx
+# *.jpg
+# *.png
+# *.bmp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
