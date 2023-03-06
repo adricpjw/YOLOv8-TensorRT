@@ -240,6 +240,7 @@ class TRTModule(torch.nn.Module):
         self.num_bindings = num_bindings
         self.num_inputs = num_inputs
         self.num_outputs = num_outputs
+        print("bindings: {self.num_bindings}, inputs: {self.num_inputs},  outputs: {self.num_outputs}")
         self.model = model
         self.context = context
         self.input_names = names[:num_inputs]

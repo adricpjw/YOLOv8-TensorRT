@@ -83,23 +83,30 @@ def main(args: argparse.Namespace) -> None:
         tensor = torch.asarray(tensor, device=device)
         # inference
         data = Engine(tensor)
+        #print('--------------------')
+        #print(len(data))
+        #print(data)
         bboxes, scores, labels = det_postprocess(data)
         bboxes -= dwdh
         bboxes /= ratio
 
         for (bbox, score, label) in zip(bboxes, scores, labels):
-            bbox = bbox.round().int().tolist()
-            cls_id = int(label)
-            cls = CLASSES[cls_id]
-            color = COLORS[cls]
-            cv2.rectangle(draw, bbox[:2], bbox[2:], color, 2)
-            cv2.putText(draw,
-                        f'{cls}:{score:.3f}', (bbox[0], bbox[1] - 2),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.75, [225, 255, 255],
-                        thickness=2)
+           bbox = bbox.round().int().tolist()
+           cls_id = int(label)
+           cls = CLASSES[cls_id]
+           print(bbox, score, label)
+           color = COLORS[cls]
+           cv2.rectangle(draw, bbox[:2], bbox[2:], color, 2)
+           cv2.putText(draw,
+                       f'{cls}:{score:.3f}', (bbox[0], bbox[1] - 2),
+                       cv2.FONT_HERSHEY_SIMPLEX,
+                       0.75, [225, 255, 255],
+                       thickness=2)
         print((1/(time.time()-start)), " fps")
-
+        
+        if args.show:
+            cv2.imshow('result',draw)
+            cv2.waitKey(2)
 
 
 def parse_args() -> argparse.Namespace:
